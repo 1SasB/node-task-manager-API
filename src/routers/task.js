@@ -39,7 +39,12 @@ router.get('/tasks', auth ,async (req,res) =>{
         // user = await User.findById(req.user.id)
         await req.user.populate({
             path : 'tasks',
-            match 
+            match, 
+            options: {
+                limit: parseInt(req.query.limit),
+                skip: parseInt(req.query.skip)
+
+            }
 
         }).execPopulate()
         user_tasks = req.user.tasks
